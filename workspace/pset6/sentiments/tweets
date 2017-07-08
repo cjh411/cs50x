@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+import helpers
+import cs50
+import html
+import os
+import plotly
+import socket
+import analyzer
+import sys
+
+from termcolor import colored
+from twython import Twython
+from twython import TwythonAuthError, TwythonError, TwythonRateLimitError
+
+def main():
+    if (len(sys.argv)==1 or len(sys.argv) >2):
+        print("Provide onle one argument, the username")
+    else:
+        sname = sys.argv[1]
+
+    
+        # absolute paths to lists
+    positives = os.path.join(sys.path[0], "positive-words.txt")
+    negatives = os.path.join(sys.path[0], "negative-words.txt")
+
+    # instantiate analyzer
+    analyzing = analyzer.Analyzer(positives, negatives)
+    
+
+    tweetlist = helpers.get_user_timeline(sname,50)
+    if tweetlist == None:
+        print("Enter different user, no tweets")
+    else:
+        for tweet in tweetlist:
+            sentsum = 0
+            for word in tweet.split():
+                sentsum+=analyzing.analyze(word)
+            text = str(sentsum)+": "+tweet
+            if sentsum > 0.0:
+                print(colored(text, "green"))
+            elif sentsum < 0.0:
+                print(colored(text, "red"))
+            else:
+                print(colored(text, "yellow"))
+                
+    
+
+if __name__ == "__main__":
+    main()

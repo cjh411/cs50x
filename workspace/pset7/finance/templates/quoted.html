@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+
+
+    <table style = "width:100%">
+         <caption>Most Recent Quote:</caption>
+             <tr>
+               <th> Stock </th>
+               <th> Price </td>
+            </tr>
+            <tr>
+               <td> {{ result['name'] }} </th>
+               <td> {{ result['price'] }} </td>
+            </tr>
+            
+    </table>
+{% endblock %}

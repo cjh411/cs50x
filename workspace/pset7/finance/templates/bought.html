@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Bought
+{% endblock %}
+
+{% block main %}
+
+
+    <table style = "width:100%">
+         <caption>Congratulations! You just bought:</caption>
+             <tr>
+               <th> Stock </th>
+               <th> Price </td>
+               <th> Shares </td>
+               <th> Total Cost </td>
+               <th> Remaining Cash </td>
+            </tr>
+            <tr>
+               <td> {{ result['name'] }} </th>
+               <td> {{ result['price'] }} </td>
+               <td> {{ shares }} </td>
+               <td> {{ cost }} </td>
+               <td> {{ cash }} </td>
+            </tr>
+            
+    </table>
+{% endblock %}
